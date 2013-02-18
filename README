@@ -1,0 +1,38 @@
+# compiling:
+
+$ mkdir build
+$ cmake ..
+$ make
+
+# start:
+
+$ sdl2osc --osc
+
+# target port, my port, target ip
+$ sdl2osc --osc 57120 57151 127.0.0.1
+
+
+# osc interface:
+
+
+### listening for:
+
+/sdl2osc/info - get info about attached devices
+
+/joystick/open" - "i" - open joystick at index
+/joystick/info" - "i" - get info about joystick at index
+/joystick/close" - "i" - close joystick at index
+
+/sdl2osc/quit - exit program
+
+### sending out:
+/joystick/axis - "iii" - joystick, axis, value
+/joystick/button - "iii" - joystick, button, value
+/joystick/hat - "iii" - joystick, hat, value
+/joystick/ball - "iii" - joystick, ball, value
+
+/joystick/info - "siiii" - joystick name, id, number of axes, number of buttons, number of hats, number of balls
+/joystick/number - "i" - amount of joysticks found
+
+/sdl2osc/started - "" - program has started
+/sdl2osc/quit - "s" - I have quit
