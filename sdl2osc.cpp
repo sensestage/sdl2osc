@@ -358,7 +358,7 @@ int main(int argc, char** argv)
     }
     if (argc == 2 && (strcmp(argv[1], "--version") == 0))
     {
-      printf("sdl-jstest 0.1.0\n");
+      printf("sdl2osc 0.1.0\n");
       exit(EXIT_SUCCESS);
     }
     else if (argc == 2 && (strcmp(argv[1], "--list") == 0 ||
@@ -544,7 +544,7 @@ int main(int argc, char** argv)
 //         SDL_JoystickClose(joy);
 	  close_all_joysticks();
 	  
-	  lo_send_from( t, s, LO_TT_IMMEDIATE, "/motiontrackosc/quit", "s", "nothing more to do, quitting" );
+	  lo_send_from( t, s, LO_TT_IMMEDIATE, "/sdl2osc/quit", "s", "nothing more to do, quitting" );
 	  lo_server_thread_free( st );
 	  lo_address_free( t );
 
