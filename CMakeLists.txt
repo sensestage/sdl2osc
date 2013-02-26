@@ -2,12 +2,23 @@
 # CMakeLists.txt
 ##########################################################################
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
+
+#include (cmake_modules/Findliblo.cmake)
 
 project(sdl2osc)
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules
+                      ${CMAKE_MODULE_PATH})
+
+#CONFIGURE_FILE(
+#  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules/cmake_uninstall.cmake.in"
+#  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+#  IMMEDIATE @ONLY)
+
+
 #set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
-include(FindPkgConfig)
+#include(FindPkgConfig)
 
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "1")
@@ -24,11 +35,23 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 # Dependencies
 ##########################################################################
 
+IF(APPLE)
+   #SET(GUI_TYPE MACOSX_BUNDLE)
+   #INCLUDE_DIRECTORIES ( /Developer/Headers/FlatCarbon )
+   FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+   #FIND_LIBRARY(QUICKTIME_LIBRARY QuickTime )
+   #FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
+   MARK_AS_ADVANCED (COCOA_LIBRARY)
+   SET(EXTRA_LIBS ${COCOA_LIBRARY})
+ENDIF (APPLE)
+
 # liblo
-pkg_check_modules(liblo REQUIRED liblo)
+#pkg_check_modules(liblo REQUIRED liblo)
+find_package(liblo REQUIRED)
 
 # sdl
-pkg_check_modules(sdl REQUIRED sdl)
+#pkg_check_modules(sdl REQUIRED sdl)
+find_package(sdl REQUIRED)
 
 # curses
 # pkg_check_modules(ncurses REQUIRED ncurses)
@@ -64,7 +87,7 @@ set(sdl2osc_SRCS
 
 add_executable( sdl2osc ${sdl2osc_SRCS} )
 
-target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl_LIBRARIES} )
+target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl_LIBRARIES}  ${EXTRA_LIBS} )
 
 install(TARGETS sdl2osc DESTINATION bin)
 
