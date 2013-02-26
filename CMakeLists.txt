@@ -31,7 +31,7 @@ pkg_check_modules(liblo REQUIRED liblo)
 pkg_check_modules(sdl2 REQUIRED sdl2)
 
 # curses
-pkg_check_modules(ncurses REQUIRED ncurses)
+# pkg_check_modules(ncurses REQUIRED ncurses)
 
 # libhighgui
 #pkg_check_modules(highgui REQUIRED highgui)
@@ -41,14 +41,14 @@ pkg_check_modules(ncurses REQUIRED ncurses)
 include_directories(
   ${CMAKE_BINARY_DIR}
   ${liblo_INCLUDE_DIRS}
-  ${ncurses_INCLUDE_DIRS}
+#   ${ncurses_INCLUDE_DIRS}
   ${sdl2_INCLUDE_DIRS}
 #  ${libhighgui_INCLUDE_DIRS}
 )
 
 link_directories(
   ${liblo_LIBRARY_DIRS}
-  ${ncurses_LIBRARY_DIRS}
+#   ${ncurses_LIBRARY_DIRS}
   ${sdl2_LIBRARY_DIRS}
 #  ${libhighgui_LIBRARY_DIRS}
 )
@@ -64,7 +64,7 @@ set(sdl2osc_SRCS
 
 add_executable( sdl2osc ${sdl2osc_SRCS} )
 
-target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl2_LIBRARIES} )
 
 install(TARGETS sdl2osc DESTINATION bin)
 
@@ -93,7 +93,7 @@ set(testkeys_SRCS
 
 add_executable( testkeys ${testkeys_SRCS} )
 
-target_link_libraries(testkeys ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(testkeys ${liblo_LIBRARIES} ${sdl2_LIBRARIES} )
 
 set(checkkeys_SRCS
   tests/checkkeys.c
@@ -101,7 +101,7 @@ set(checkkeys_SRCS
 
 add_executable( checkkeys ${checkkeys_SRCS} )
 
-target_link_libraries(checkkeys ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(checkkeys ${liblo_LIBRARIES} ${sdl2_LIBRARIES} )
 
 
 
@@ -111,7 +111,7 @@ set(testhaptic_SRCS
 
 add_executable( testhaptic ${testhaptic_SRCS} )
 
-target_link_libraries(testhaptic ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(testhaptic ${liblo_LIBRARIES} ${sdl2_LIBRARIES} )
 
 
 set(testgesture_SRCS
@@ -120,7 +120,7 @@ set(testgesture_SRCS
 
 add_executable( testgesture ${testgesture_SRCS} )
 
-target_link_libraries(testgesture ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} m )
+target_link_libraries(testgesture ${liblo_LIBRARIES} ${sdl2_LIBRARIES} m )
 
 set(testgamecontroller_SRCS
   tests/testgamecontroller.c
@@ -128,7 +128,7 @@ set(testgamecontroller_SRCS
 
 add_executable( testgamecontroller ${testgamecontroller_SRCS} )
 
-target_link_libraries(testgamecontroller ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(testgamecontroller ${liblo_LIBRARIES} ${sdl2_LIBRARIES} )
 
 
 set(testjoystick_SRCS
@@ -137,7 +137,7 @@ set(testjoystick_SRCS
 
 add_executable( testjoystick ${testjoystick_SRCS} )
 
-target_link_libraries(testjoystick ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(testjoystick ${liblo_LIBRARIES} ${sdl2_LIBRARIES} )
 
 # install(TARGETS sdl2osc DESTINATION bin)
 
