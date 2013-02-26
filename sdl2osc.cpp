@@ -18,7 +18,7 @@
 
 #include <SDL/SDL.h>
 #include <assert.h>
-#include <curses.h>
+// #include <curses.h>
 #include <errno.h>
 #include <limits.h>
 #include <stdio.h>
@@ -263,20 +263,6 @@ int joy_close_handler(const char *path, const char *types, lo_arg **argv, int ar
  
  
 /// end OSC stuff
-
-void print_bar(int pos, int len)
-{
-  int i;
-  addch('[');
-  for(i = 0; i < len; ++i)
-  {
-    if (i == pos)
-      addch('#');
-    else
-      addch(' ');
-  }
-  addch(']');
-}
 
 int str2int(const char* str, int* val)
 {

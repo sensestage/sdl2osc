@@ -31,7 +31,7 @@ pkg_check_modules(liblo REQUIRED liblo)
 pkg_check_modules(sdl REQUIRED sdl)
 
 # curses
-pkg_check_modules(ncurses REQUIRED ncurses)
+# pkg_check_modules(ncurses REQUIRED ncurses)
 
 # libhighgui
 #pkg_check_modules(highgui REQUIRED highgui)
@@ -41,14 +41,14 @@ pkg_check_modules(ncurses REQUIRED ncurses)
 include_directories(
   ${CMAKE_BINARY_DIR}
   ${liblo_INCLUDE_DIRS}
-  ${ncurses_INCLUDE_DIRS}
+#   ${ncurses_INCLUDE_DIRS}
   ${sdl_INCLUDE_DIRS}
 #  ${libhighgui_INCLUDE_DIRS}
 )
 
 link_directories(
   ${liblo_LIBRARY_DIRS}
-  ${ncurses_LIBRARY_DIRS}
+#   ${ncurses_LIBRARY_DIRS}
   ${sdl_LIBRARY_DIRS}
 #  ${libhighgui_LIBRARY_DIRS}
 )
@@ -64,7 +64,7 @@ set(sdl2osc_SRCS
 
 add_executable( sdl2osc ${sdl2osc_SRCS} )
 
-target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl_LIBRARIES} )
 
 install(TARGETS sdl2osc DESTINATION bin)
 
