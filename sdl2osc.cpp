@@ -20,7 +20,7 @@
 // #include <SDL2/SDL_joystick.h>
 
 #include <assert.h>
-#include <curses.h>
+// #include <curses.h>
 #include <errno.h>
 #include <limits.h>
 #include <stdio.h>
@@ -265,19 +265,6 @@ int joy_close_handler(const char *path, const char *types, lo_arg **argv, int ar
  
 /// end OSC stuff
 
-void print_bar(int pos, int len)
-{
-  int i;
-  addch('[');
-  for(i = 0; i < len; ++i)
-  {
-    if (i == pos)
-      addch('#');
-    else
-      addch(' ');
-  }
-  addch(']');
-}
 
 int str2int(const char* str, int* val)
 {
@@ -343,8 +330,8 @@ int main(int argc, char** argv)
 
 
   // FIXME: We don't need video, but without it SDL will fail to work in SDL_WaitEvent()
-//   if(SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
-  if(SDL_Init(SDL_INIT_TIMER | SDL_INIT_EVENT | SDL_INIT_JOYSTICK) < 0)
+  if(SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
+//   if(SDL_Init(SDL_INIT_TIMER | SDL_INIT_EVENT | SDL_INIT_JOYSTICK) < 0)
   {
     fprintf(stderr, "Unable to init SDL: %s\n", SDL_GetError());
     exit(1);
