@@ -28,7 +28,7 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 pkg_check_modules(liblo REQUIRED liblo)
 
 # sdl
-pkg_check_modules(sdl REQUIRED sdl)
+pkg_check_modules(sdl2 REQUIRED sdl2)
 
 # curses
 pkg_check_modules(ncurses REQUIRED ncurses)
@@ -42,20 +42,20 @@ include_directories(
   ${CMAKE_BINARY_DIR}
   ${liblo_INCLUDE_DIRS}
   ${ncurses_INCLUDE_DIRS}
-  ${sdl_INCLUDE_DIRS}
+  ${sdl2_INCLUDE_DIRS}
 #  ${libhighgui_INCLUDE_DIRS}
 )
 
 link_directories(
   ${liblo_LIBRARY_DIRS}
   ${ncurses_LIBRARY_DIRS}
-  ${sdl_LIBRARY_DIRS}
+  ${sdl2_LIBRARY_DIRS}
 #  ${libhighgui_LIBRARY_DIRS}
 )
 
 
 ##########################################################################
-# flamwizard
+# sdl2osc
 ##########################################################################
 
 set(sdl2osc_SRCS
@@ -64,7 +64,7 @@ set(sdl2osc_SRCS
 
 add_executable( sdl2osc ${sdl2osc_SRCS} )
 
-target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl_LIBRARIES} ${ncurses_LIBRARIES} )
+target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
 
 install(TARGETS sdl2osc DESTINATION bin)
 
@@ -77,7 +77,73 @@ install(TARGETS sdl2osc DESTINATION bin)
 # Tests
 ##########################################################################
 
-#enable_testing()
+
+# set(testinput_SRCS
+#   tests/testinput.c
+# )
+# 
+# add_executable( testinput ${testinput_SRCS} )
+# 
+# target_link_libraries(testinput ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+# #enable_testing()
+
+set(testkeys_SRCS
+  tests/testkeys.c
+)
+
+add_executable( testkeys ${testkeys_SRCS} )
+
+target_link_libraries(testkeys ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+
+set(checkkeys_SRCS
+  tests/checkkeys.c
+)
+
+add_executable( checkkeys ${checkkeys_SRCS} )
+
+target_link_libraries(checkkeys ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+
+
+
+set(testhaptic_SRCS
+  tests/testhaptic.c
+)
+
+add_executable( testhaptic ${testhaptic_SRCS} )
+
+target_link_libraries(testhaptic ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+
+
+set(testgesture_SRCS
+  tests/testgesture.c
+)
+
+add_executable( testgesture ${testgesture_SRCS} )
+
+target_link_libraries(testgesture ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} m )
+
+set(testgamecontroller_SRCS
+  tests/testgamecontroller.c
+)
+
+add_executable( testgamecontroller ${testgamecontroller_SRCS} )
+
+target_link_libraries(testgamecontroller ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+
+
+set(testjoystick_SRCS
+  tests/testjoystick.c
+)
+
+add_executable( testjoystick ${testjoystick_SRCS} )
+
+target_link_libraries(testjoystick ${liblo_LIBRARIES} ${sdl2_LIBRARIES} ${ncurses_LIBRARIES} )
+
+# install(TARGETS sdl2osc DESTINATION bin)
+
+#configure_file(${CMAKE_SOURCE_DIR}/src/flamwizard/flamwizard.desktop.in ${CMAKE_BINARY_DIR}/flamwizard.desktop)
+#install(FILES ${CMAKE_BINARY_DIR}/flamwizard.desktop DESTINATION share/applications)
+#install(FILES ${CMAKE_SOURCE_DIR}/resources/flamwizard.png DESTINATION share/icons/hicolor/32x32/apps)
 
 
 ##########################################################################
