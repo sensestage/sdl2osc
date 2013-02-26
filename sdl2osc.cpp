@@ -314,8 +314,6 @@ void print_help(const char* prg)
   printf("  %s --test 1\n", prg);
 }
 
-
-
 int main(int argc, char** argv)
 {
   if (argc == 1)
@@ -484,36 +482,36 @@ int main(int argc, char** argv)
         printf("Entering joystick test loop, press Ctrl-c to exit\n");
 //         int quit = 0;
         SDL_Event event;
-
+        lo_timetag lo_now = LO_TT_IMMEDIATE;
+        
         while(!done && SDL_WaitEvent(&event))
         {
           switch(event.type)
           {
             case SDL_JOYAXISMOTION:
-	      lo_send_from( t, s, LO_TT_IMMEDIATE, "/joystick/axis", "iii", event.jaxis.which, event.jaxis.axis, event.jaxis.value );
+	      lo_send_from( t, s, lo_now, "/joystick/axis", "iii", event.jaxis.which, event.jaxis.axis, event.jaxis.value );
 //               printf("SDL_JOYAXISMOTION: joystick: %d axis: %d value: %d\n",
 //                      event.jaxis.which, event.jaxis.axis, event.jaxis.value);
               break;
-
             case SDL_JOYBUTTONDOWN:
-	      lo_send_from( t, s, LO_TT_IMMEDIATE, "/joystick/button", "iii", event.jbutton.which, event.jbutton.button, event.jbutton.state );
+	      lo_send_from( t, s, lo_now, "/joystick/button", "iii", event.jbutton.which, event.jbutton.button, event.jbutton.state );
 //               printf("SDL_JOYBUTTONUP: joystick: %d button: %d state: %d\n",
 //                      event.jbutton.which, event.jbutton.button, event.jbutton.state);
               break;
             case SDL_JOYBUTTONUP:
-	      lo_send_from( t, s, LO_TT_IMMEDIATE, "/joystick/button", "iii", event.jbutton.which, event.jbutton.button, event.jbutton.state );
+	      lo_send_from( t, s, lo_now, "/joystick/button", "iii", event.jbutton.which, event.jbutton.button, event.jbutton.state );
 //               printf("SDL_JOYBUTTONDOWN: joystick: %d button: %d state: %d\n",
 //                      event.jbutton.which, event.jbutton.button, event.jbutton.state);
               break;
 
             case SDL_JOYHATMOTION:
-	      lo_send_from( t, s, LO_TT_IMMEDIATE, "/joystick/hat", "iii", event.jhat.which, event.jhat.hat, event.jhat.value );
+	      lo_send_from( t, s, lo_now, "/joystick/hat", "iii", event.jhat.which, event.jhat.hat, event.jhat.value );
 //               printf("SDL_JOYHATMOTION: joystick: %d hat: %d value: %d\n",
 //                      event.jhat.which, event.jhat.hat, event.jhat.value);
               break;
 
             case SDL_JOYBALLMOTION:
-	      lo_send_from( t, s, LO_TT_IMMEDIATE, "/joystick/ball", "iii", event.jball.which, event.jball.ball, event.jball.xrel, event.jball.yrel );
+	      lo_send_from( t, s, lo_now, "/joystick/ball", "iii", event.jball.which, event.jball.ball, event.jball.xrel, event.jball.yrel );
 //               printf("SDL_JOYBALLMOTION: joystick: %d ball: %d x: %d y: %d\n",
 //                      event.jball.which, event.jball.ball, event.jball.xrel, event.jball.yrel);
               break;
@@ -530,7 +528,7 @@ int main(int argc, char** argv)
 //         SDL_JoystickClose(joy);
 	  close_all_joysticks();
 	  
-	  lo_send_from( t, s, LO_TT_IMMEDIATE, "/sdl2osc/quit", "s", "nothing more to do, quitting" );
+	  lo_send_from( t, s, lo_now, "/sdl2osc/quit", "s", "nothing more to do, quitting" );
 	  lo_server_thread_free( st );
 	  lo_address_free( t );
 
