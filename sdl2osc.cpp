@@ -17,6 +17,8 @@
 //  02111-1307, USA.
 
 #include <SDL/SDL.h>
+//#include <SDL/SDL_main.h>
+
 #include <assert.h>
 // #include <curses.h>
 #include <errno.h>
