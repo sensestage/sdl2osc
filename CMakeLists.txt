@@ -37,10 +37,7 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 IF(APPLE)
    #SET(GUI_TYPE MACOSX_BUNDLE)
-   #INCLUDE_DIRECTORIES ( /Developer/Headers/FlatCarbon )
    FIND_LIBRARY(COCOA_LIBRARY Cocoa)
-   #FIND_LIBRARY(QUICKTIME_LIBRARY QuickTime )
-   #FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
    MARK_AS_ADVANCED (COCOA_LIBRARY)
    SET(EXTRA_LIBS ${COCOA_LIBRARY})
 ENDIF (APPLE)
@@ -53,27 +50,16 @@ find_package(liblo REQUIRED)
 #pkg_check_modules(sdl REQUIRED sdl)
 find_package(sdl REQUIRED)
 
-# curses
-# pkg_check_modules(ncurses REQUIRED ncurses)
-
-# libhighgui
-#pkg_check_modules(highgui REQUIRED highgui)
-
 # Set up compiler flags
-
 include_directories(
   ${CMAKE_BINARY_DIR}
   ${liblo_INCLUDE_DIRS}
-#   ${ncurses_INCLUDE_DIRS}
   ${sdl_INCLUDE_DIRS}
-#  ${libhighgui_INCLUDE_DIRS}
 )
 
 link_directories(
   ${liblo_LIBRARY_DIRS}
-#   ${ncurses_LIBRARY_DIRS}
   ${sdl_LIBRARY_DIRS}
-#  ${libhighgui_LIBRARY_DIRS}
 )
 
 
@@ -87,7 +73,7 @@ set(sdl2osc_SRCS
 
 add_executable( sdl2osc ${sdl2osc_SRCS} )
 
-target_link_libraries(sdl2osc ${liblo_LIBRARIES} ${sdl_LIBRARIES}  ${EXTRA_LIBS} )
+target_link_libraries(sdl2osc ${LIBLO_LIBRARIES} ${SDL_LIBRARY}  ${EXTRA_LIBS} )
 
 install(TARGETS sdl2osc DESTINATION bin)
 
